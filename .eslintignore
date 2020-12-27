@@ -1,0 +1,6 @@
+## file extensions
+*.*
+!src/**/*.vue
+!src/**/.js
+
+LICENSE
