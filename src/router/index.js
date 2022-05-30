@@ -1,10 +1,12 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
+
+import Store from '@/store/index.js'
+
 import Home from '../views/Home.vue'
 import Login from '../components/Login.vue'
 import Register from '../components/Register.vue'
 import Recipes from '../components/Recipes.vue'
-import Store from '../store/index.js'
 
 Vue.use(VueRouter)
 
@@ -34,6 +36,7 @@ const routes = [
       },
       {
         path: '',
+        name: 'RecipeList',
         component: Recipes,
       },
     ],
@@ -45,6 +48,8 @@ const router = new VueRouter({
 })
 
 router.beforeEach((to, from, next) => {
+  // check for a token
+  Store.commit('auth/checkToken')
   // redirect to Login if no authenticated, but route needs it
   if (
     !Store.getters['auth/isAuthenticated'] &&

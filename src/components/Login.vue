@@ -10,18 +10,18 @@
           @input="$v.email.$touch()"
           @blur="$v.email.$touch()"
           ref="email"
-          v-on:keyup.enter="$refs.senha.focus()"
+          v-on:keyup.enter="$refs.password.focus()"
         ></v-text-field>
       </v-row>
       <v-row>
         <v-text-field
           label="Senha"
-          v-model="senha"
+          v-model="password"
           required
-          :error-messages="senhaErrors"
-          @input="$v.senha.$touch()"
-          @blur="$v.senha.$touch()"
-          ref="senha"
+          :error-messages="passwordErrors"
+          @input="$v.password.$touch()"
+          @blur="$v.password.$touch()"
+          ref="password"
           type="password"
           v-on:keyup.enter="login()"
         ></v-text-field>
@@ -34,9 +34,18 @@
     </form>
     <v-row class="mt-10">
       <v-col>
-        <p class="caption">Se quiser testar use as credenciais de demo:</p>
-        <p class="caption mb-0">Email: email@falso.com</p>
-        <p class="caption">Senha: 1234</p>
+        <p class="caption">
+          Se quiser testar use as credenciais de demo:
+          <v-btn
+            v-on:click="demoLogin()"
+            color="accent"
+            :loading="loading"
+            :disabled="loading"
+            class="ml-2"
+          >
+            Login demo
+          </v-btn>
+        </p>
       </v-col>
     </v-row>
     <v-snackbar v-model="snackbar.show" :timeout="snackbar.timeout">
@@ -59,14 +68,27 @@
 
     data: () => ({
       email: null,
-      senha: null,
+      password: null,
       snackbar: {
         msg: 'Erro ao realizar login',
         show: false,
         timeout: 2000,
       },
       loading: false,
+      demo: {
+        email: 'email@falso.com',
+        password: '1234',
+      },
     }),
+
+    mounted() {
+      let token = localStorage.getItem('token')
+      if ('token' in localStorage && token !== undefined && token !== null) {
+        this.$router.push({
+          path: '/',
+        })
+      }
+    },
 
     methods: {
       login: async function() {
@@ -78,7 +100,25 @@
         try {
           await this.$store.dispatch('auth/login', {
             email: this.email,
-            senha: this.senha,
+            password: this.password,
+          })
+        } catch (err) {
+          this.loading = false
+          this.snackbar.show = true
+          return
+        }
+        this.loading = false
+        this.$router.push({
+          path: '/',
+        })
+      },
+
+      demoLogin: async function() {
+        this.loading = true
+        try {
+          await this.$store.dispatch('auth/login', {
+            email: this.demo.email,
+            password: this.demo.password,
           })
         } catch (err) {
           this.loading = false
@@ -94,7 +134,7 @@
 
     validations: {
       email: { required, email },
-      senha: { required },
+      password: { required },
     },
 
     computed: {
@@ -105,10 +145,10 @@
         !this.$v.email.email && errors.push('Insira um email válido')
         return errors
       },
-      senhaErrors() {
+      passwordErrors() {
         const errors = []
-        if (!this.$v.senha.$dirty) return errors
-        !this.$v.senha.required && errors.push('Insira a senha')
+        if (!this.$v.password.$dirty) return errors
+        !this.$v.password.required && errors.push('Insira a senha')
         return errors
       },
     },
