@@ -14,12 +14,16 @@
       ></v-skeleton-loader>
 
       <RecipeCard
-        v-for="recipe in recipes"
+        v-for="recipe in allRecipes"
         :key="recipe.id"
         :recipe="recipe"
         class="mx-auto mb-5"
       ></RecipeCard>
     </div>
+
+    <infinite-loading @infinite="infiniteHandler">
+      <div slot="no-more" class="text-body-2 text--secondary">Fim dos resultados</div>
+    </infinite-loading>
   </div>
 </template>
 
@@ -36,10 +40,11 @@
 
     data: () => ({
       loading: true,
+      allRecipes: [],
     }),
 
     async beforeCreate() {
-      await Promise.all([this.$store.dispatch('recipe/get')])
+      this.allRecipes = await this.$store.dispatch('recipe/get')
       this.loading = false
     },
 
@@ -47,6 +52,20 @@
       ...mapState({
         recipes: state => state.recipe.recipes,
       }),
+    },
+
+    methods: {
+      async infiniteHandler($state) {
+        const recipes = await this.$store.dispatch('recipe/get', {
+          offset: this.allRecipes.length,
+        })
+        this.allRecipes = this.allRecipes.concat(recipes)
+        if (recipes.length) {
+          $state.loaded()
+        } else {
+          $state.complete()
+        }
+      },
     },
   }
 </script>

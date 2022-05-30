@@ -13,9 +13,10 @@ export default {
   },
   actions: {
     // asynchronous
-    async get(context) {
-      let response = await axios.get('/recipes')
+    async get(context, params) {
+      let response = await axios.get('/recipes', { params })
       context.commit('set', response.data)
+      return response.data
     },
   },
   modules: {},

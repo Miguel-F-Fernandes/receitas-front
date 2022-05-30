@@ -12,6 +12,7 @@ import './plugins/date'
 import './plugins/array'
 import './plugins/sentry'
 import { VuePlausible } from 'vue-plausible'
+import InfiniteLoading from 'vue-infinite-loading'
 
 Vue.use(Vuelidate)
 Vue.use(DatetimePicker)
@@ -21,6 +22,7 @@ Vue.use(VuePlausible, {
   apiHost: 'https://analisar.coisa.online',
 })
 Vue.$plausible.enableAutoPageviews()
+Vue.use(InfiniteLoading)
 
 new Vue({
   router,
