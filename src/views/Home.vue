@@ -51,7 +51,7 @@
           </v-list-item-content>
         </v-list-item>
 
-        <v-list-item @click="goTo('MyIngredientList')">
+        <v-list-item @click="goTo('MyIngredientList')" v-if="user">
           <v-list-item-icon>
             <v-icon>mdi-wardrobe</v-icon>
           </v-list-item-icon>

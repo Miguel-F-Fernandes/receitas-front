@@ -1,11 +1,13 @@
 <template>
   <v-container>
-    <v-text-field label="Buscar receita" outlined v-model="search"></v-text-field>
+    <v-text-field :label="label" outlined v-model="search"></v-text-field>
   </v-container>
 </template>
 
 <script>
   export default {
+    props: ['label'],
+
     data: () => ({
       search: null,
       debounceOptions: {

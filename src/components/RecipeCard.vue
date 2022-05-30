@@ -48,4 +48,8 @@
   }
 </script>
 
-<style scoped lang="scss"></style>
+<style scoped lang="scss">
+  .v-card__title {
+    word-break: keep-all;
+  }
+</style>

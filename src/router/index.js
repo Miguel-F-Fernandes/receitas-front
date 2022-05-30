@@ -7,6 +7,8 @@ import Home from '../views/Home.vue'
 import Login from '../components/Login.vue'
 import Register from '../components/Register.vue'
 import Recipes from '../components/Recipes.vue'
+import Ingredients from '../components/Ingredients.vue'
+import MyIngredients from '../components/MyIngredients.vue'
 
 Vue.use(VueRouter)
 
@@ -33,6 +35,16 @@ const routes = [
       {
         path: 'feedback',
         component: () => import(/* webpackChunkName: "feedback" */ '../views/Feedback.vue'),
+      },
+      {
+        path: 'ingredients',
+        name: 'IngredientList',
+        component: Ingredients,
+      },
+      {
+        path: 'my-ingredients',
+        name: 'MyIngredientList',
+        component: MyIngredients,
       },
       {
         path: '',

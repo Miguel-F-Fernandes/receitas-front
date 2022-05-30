@@ -1,6 +1,6 @@
 <template>
   <div>
-    <Search label="Buscar receitas" @update="search = $event"></Search>
+    <Search label="Buscar ingredientes" @update="search = $event"></Search>
 
     <div class="d-flex flex-wrap">
       <v-skeleton-loader
@@ -13,12 +13,12 @@
         elevation="2"
       ></v-skeleton-loader>
 
-      <RecipeCard
-        v-for="recipe in allRecipes"
-        :key="recipe.id"
-        :recipe="recipe"
+      <IngredientCard
+        v-for="ingredient in allIngredients"
+        :key="ingredient.id"
+        :ingredient="ingredient"
         class="mx-auto mb-5"
-      ></RecipeCard>
+      ></IngredientCard>
     </div>
 
     <infinite-loading @infinite="infiniteHandler">
@@ -28,40 +28,40 @@
 </template>
 
 <script>
-  import RecipeCard from '@/components/RecipeCard.vue'
+  import IngredientCard from '@/components/IngredientCard.vue'
   import Search from '@/components/Search.vue'
 
   export default {
     components: {
-      RecipeCard,
+      IngredientCard,
       Search,
     },
 
     data: () => ({
       loading: true,
-      allRecipes: [],
+      allIngredients: [],
       search: null,
     }),
 
     async beforeCreate() {
-      this.allRecipes = await this.$store.dispatch('recipe/get')
+      this.allIngredients = await this.$store.dispatch('my-ingredient/get')
       this.loading = false
     },
 
     watch: {
       async search(newValue) {
-        this.allRecipes = await this.$store.dispatch('recipe/get', newValue)
+        this.allIngredients = await this.$store.dispatch('my-ingredient/get', newValue)
       },
     },
 
     methods: {
       async infiniteHandler($state) {
-        const recipes = await this.$store.dispatch('recipe/get', {
-          offset: this.allRecipes.length,
+        const ingredients = await this.$store.dispatch('my-ingredient/get', {
+          offset: this.allIngredients.length,
           ...this.search,
         })
-        this.allRecipes = this.allRecipes.concat(recipes)
-        if (recipes.length) {
+        this.allIngredients = this.allIngredients.concat(ingredients)
+        if (ingredients.length) {
           $state.loaded()
         } else {
           $state.complete()
