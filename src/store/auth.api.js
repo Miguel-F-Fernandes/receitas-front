@@ -3,7 +3,16 @@ import * as Sentry from '@sentry/vue'
 
 const parseJwt = token => {
   try {
-    return JSON.parse(atob(token.split('.')[1]))
+    return JSON.parse(
+      decodeURIComponent(
+        atob(token.split('.')[1])
+          .split('')
+          .map(function(c) {
+            return '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2)
+          })
+          .join('')
+      )
+    )
   } catch (e) {
     return null
   }
