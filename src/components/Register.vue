@@ -4,12 +4,12 @@
       <v-row>
         <v-text-field
           label="Nome"
-          v-model="nome"
+          v-model="name"
           required
-          :error-messages="nomeErrors"
-          @input="$v.nome.$touch()"
-          @blur="$v.nome.$touch()"
-          ref="nome"
+          :error-messages="nameErrors"
+          @input="$v.name.$touch()"
+          @blur="$v.name.$touch()"
+          ref="name"
           v-on:keyup.enter="$refs.email.focus()"
         ></v-text-field>
       </v-row>
@@ -22,18 +22,18 @@
           @input="$v.email.$touch()"
           @blur="$v.email.$touch()"
           ref="email"
-          v-on:keyup.enter="$refs.senha.focus()"
+          v-on:keyup.enter="$refs.password.focus()"
         ></v-text-field>
       </v-row>
       <v-row>
         <v-text-field
           label="Senha"
-          v-model="senha"
+          v-model="password"
           required
-          :error-messages="senhaErrors"
-          @input="$v.senha.$touch()"
-          @blur="$v.senha.$touch()"
-          ref="senha"
+          :error-messages="passwordErrors"
+          @input="$v.password.$touch()"
+          @blur="$v.password.$touch()"
+          ref="password"
           type="password"
           v-on:keyup.enter="register()"
         ></v-text-field>
@@ -44,6 +44,13 @@
         </v-btn>
       </v-row>
     </form>
+
+    <v-row class="mt-10">
+      <v-btn block v-on:click="login()" color="primary darken-2">
+        Já possui conta? Faça login aqui
+      </v-btn>
+    </v-row>
+
     <v-snackbar v-model="snackbar.show" :timeout="snackbar.timeout">
       {{ snackbar.msg }}
       <template v-slot:action="{ attrs }">
@@ -63,9 +70,9 @@
     mixins: [validationMixin],
 
     data: () => ({
-      nome: null,
+      name: null,
       email: null,
-      senha: null,
+      password: null,
       snackbar: {
         msg: 'Erro ao realizar cadastro',
         show: false,
@@ -73,6 +80,15 @@
       },
       loading: false,
     }),
+
+    mounted() {
+      let token = localStorage.getItem('token')
+      if ('token' in localStorage && token !== undefined && token !== null) {
+        this.$router.push({
+          path: '/',
+        })
+      }
+    },
 
     methods: {
       register: async function() {
@@ -83,9 +99,9 @@
         this.loading = true
         try {
           await this.$store.dispatch('auth/register', {
-            nome: this.nome,
+            name: this.name,
             email: this.email,
-            senha: this.senha,
+            password: this.password,
           })
         } catch (err) {
           this.snackbar.msg = err.response.data
@@ -98,19 +114,25 @@
           path: '/',
         })
       },
+
+      login: function() {
+        this.$router.push({
+          path: '/login',
+        })
+      },
     },
 
     validations: {
-      nome: { required },
+      name: { required },
       email: { required, email },
-      senha: { required },
+      password: { required },
     },
 
     computed: {
-      nomeErrors() {
+      nameErrors() {
         const errors = []
-        if (!this.$v.nome.$dirty) return errors
-        !this.$v.nome.required && errors.push('Insira um nome')
+        if (!this.$v.name.$dirty) return errors
+        !this.$v.name.required && errors.push('Insira um nome')
         return errors
       },
       emailErrors() {
@@ -120,10 +142,10 @@
         !this.$v.email.email && errors.push('Insira um email válido')
         return errors
       },
-      senhaErrors() {
+      passwordErrors() {
         const errors = []
-        if (!this.$v.senha.$dirty) return errors
-        !this.$v.senha.required && errors.push('Insira a senha')
+        if (!this.$v.password.$dirty) return errors
+        !this.$v.password.required && errors.push('Insira a senha')
         return errors
       },
     },

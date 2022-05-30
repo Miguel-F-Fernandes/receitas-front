@@ -1,5 +1,22 @@
 <template>
   <v-container>
+    <v-row>
+      <v-col>
+        <p class="caption">
+          Se quiser testar use as credenciais de demo:
+          <v-btn
+            v-on:click="demoLogin()"
+            color="accent darken-1"
+            :loading="loading"
+            :disabled="loading"
+            class="ml-2"
+          >
+            Login demo
+          </v-btn>
+        </p>
+      </v-col>
+    </v-row>
+
     <form>
       <v-row>
         <v-text-field
@@ -32,22 +49,13 @@
         </v-btn>
       </v-row>
     </form>
+
     <v-row class="mt-10">
-      <v-col>
-        <p class="caption">
-          Se quiser testar use as credenciais de demo:
-          <v-btn
-            v-on:click="demoLogin()"
-            color="accent"
-            :loading="loading"
-            :disabled="loading"
-            class="ml-2"
-          >
-            Login demo
-          </v-btn>
-        </p>
-      </v-col>
+      <v-btn block v-on:click="register()" color="primary darken-2">
+        Ainda não tem conta? Faça seu cadastro aqui
+      </v-btn>
     </v-row>
+
     <v-snackbar v-model="snackbar.show" :timeout="snackbar.timeout">
       {{ snackbar.msg }}
       <template v-slot:action="{ attrs }">
@@ -128,6 +136,12 @@
         this.loading = false
         this.$router.push({
           path: '/',
+        })
+      },
+
+      register: function() {
+        this.$router.push({
+          path: '/register',
         })
       },
     },
