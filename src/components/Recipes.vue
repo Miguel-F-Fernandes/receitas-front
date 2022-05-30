@@ -1,6 +1,6 @@
 <template>
   <div>
-    <!-- TODO: busca -->
+    <Search></Search>
 
     <div class="d-flex flex-wrap">
       <v-skeleton-loader
@@ -24,12 +24,14 @@
 </template>
 
 <script>
-  import RecipeCard from '@/components/RecipeCard.vue'
   import { mapState } from 'vuex'
+  import RecipeCard from '@/components/RecipeCard.vue'
+  import Search from '@/components/Search.vue'
 
   export default {
     components: {
       RecipeCard,
+      Search,
     },
 
     data: () => ({
