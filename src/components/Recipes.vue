@@ -1,6 +1,6 @@
 <template>
   <div>
-    <Search></Search>
+    <Search @update="search = $event"></Search>
 
     <div class="d-flex flex-wrap">
       <v-skeleton-loader
@@ -41,6 +41,7 @@
     data: () => ({
       loading: true,
       allRecipes: [],
+      search: null,
     }),
 
     async beforeCreate() {
@@ -54,10 +55,17 @@
       }),
     },
 
+    watch: {
+      async search(newValue) {
+        this.allRecipes = await this.$store.dispatch('recipe/get', newValue)
+      },
+    },
+
     methods: {
       async infiniteHandler($state) {
         const recipes = await this.$store.dispatch('recipe/get', {
           offset: this.allRecipes.length,
+          ...this.search,
         })
         this.allRecipes = this.allRecipes.concat(recipes)
         if (recipes.length) {
