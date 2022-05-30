@@ -40,17 +40,27 @@
     data: () => ({
       loading: true,
       allIngredients: [],
-      search: null,
+      search: {},
     }),
 
     async beforeCreate() {
       this.allIngredients = await this.$store.dispatch('ingredient/get')
       this.loading = false
+      if (
+        Object.keys(this.$route.query) &&
+        JSON.stringify(this.search) !== JSON.stringify(this.$route.query)
+      ) {
+        this.search = this.$route.query
+      }
     },
 
     watch: {
       async search(newValue) {
         this.allIngredients = await this.$store.dispatch('ingredient/get', newValue)
+        this.respondToRouteChanges = false
+        this.$router.replace({ query: newValue }).finally(() => {
+          this.respondToRouteChanges = true
+        })
       },
     },
 

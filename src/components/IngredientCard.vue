@@ -1,5 +1,5 @@
 <template>
-  <v-card width="260">
+  <v-card width="260" class="d-flex flex-column justify-space-between">
     <v-card-title>{{ ingredient.name }}</v-card-title>
     <div class="d-flex flex-no-wrap justify-start">
       <div>
@@ -14,7 +14,9 @@
             </v-rating>
           </v-row>
 
-          <div class="font-weight-light">{{ ingredient._count.recipes }} receitas</div>
+          <div class="font-weight-light cursor-pointer" @click="goToRecipes()">
+            {{ ingredient._count.recipes }} receita{{ ingredient._count.recipes > 1 ? 's' : '' }}
+          </div>
         </v-card-text>
       </div>
     </div>
@@ -31,6 +33,17 @@
 
         return text.slice(0, limit) + '...'
       },
+
+      goToRecipes() {
+        this.$router
+          .push({
+            path: '/',
+            query: {
+              'ingredients[ingredient][id]': this.ingredient.id,
+            },
+          })
+          .catch(() => {})
+      },
     },
   }
 </script>
@@ -38,5 +51,8 @@
 <style scoped lang="scss">
   .v-card__title {
     word-break: keep-all;
+  }
+  .cursor-pointer {
+    cursor: pointer;
   }
 </style>
