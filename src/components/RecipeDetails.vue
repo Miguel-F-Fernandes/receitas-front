@@ -1,7 +1,6 @@
 <template>
   <v-container>
-    <!-- TODO: skeleton -->
-    <div v-if="loading"></div>
+    <div v-if="loading">Loading...</div>
 
     <div v-else>
       <div class="d-flex flex-no-wrap justify-start">
@@ -98,21 +97,32 @@
       amountTypes: [],
     }),
 
-    async beforeCreate() {
-      try {
-        this.recipe = await this.$store.dispatch('recipe/getById', {
-          id: this.$route.params.id,
-        })
-        this.amountTypes = Object.keys(this.recipe.ingredients[0].amount)
-      } catch (err) {
-        this.$router.push({
-          name: 'RecipeList',
-        })
-      }
-      this.loading = false
+    created() {
+      this.fetchRecipe(this.$route.params.id)
+      this.$watch(
+        () => this.$route.params,
+        to => {
+          this.fetchRecipe(to.id)
+        }
+      )
     },
 
-    methods: {},
+    methods: {
+      fetchRecipe: async function(id) {
+        this.loading = true
+        try {
+          this.recipe = await this.$store.dispatch('recipe/getById', {
+            id,
+          })
+          this.amountTypes = Object.keys(this.recipe.ingredients[0].amount)
+        } catch (err) {
+          this.$router.push({
+            name: 'RecipeList',
+          })
+        }
+        this.loading = false
+      },
+    },
   }
 </script>
 
