@@ -58,6 +58,15 @@
       }
     },
 
+    created() {
+      this.$watch(
+        () => this.$route.query,
+        async to => {
+          this.allIngredients = await this.$store.dispatch('ingredient/get', to)
+        }
+      )
+    },
+
     watch: {
       async search(newValue) {
         this.allIngredients = await this.$store.dispatch('my-ingredient/get', newValue)
