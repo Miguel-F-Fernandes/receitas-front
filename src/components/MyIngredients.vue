@@ -56,7 +56,6 @@
 
     watch: {
       async search(newValue) {
-        console.log('search')
         this.allIngredients = await this.$store.dispatch('my-ingredient/get', newValue)
         this.respondToRouteChanges = false
         this.$router.replace({ query: newValue }).finally(() => {

@@ -99,9 +99,6 @@
       let token = localStorage.getItem('token')
       if ('token' in localStorage && token !== undefined && token !== null) {
         this.$store.commit('auth/setToken', token)
-        this.$router.push({
-          path: '/',
-        })
       }
     },
 

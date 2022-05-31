@@ -1,5 +1,5 @@
 <template>
-  <v-card width="400">
+  <v-card width="400" @click="goToRecipe()">
     <v-card-title>{{ recipe.name }}</v-card-title>
     <div class="d-flex flex-no-wrap justify-start">
       <v-avatar size="125">
@@ -27,7 +27,7 @@
             </v-rating>
           </v-row>
 
-          <div class="font-weight-light">{{ truncate(recipe.description) }}</div>
+          <div class="font-weight-light text-justify">{{ truncate(recipe.description) }}</div>
         </v-card-text>
       </div>
     </div>
@@ -43,6 +43,12 @@
         if (!text || text.length <= limit) return text
 
         return text.slice(0, limit) + '...'
+      },
+
+      goToRecipe() {
+        this.$router.push({
+          path: `/recipe/${this.recipe.id}`,
+        })
       },
     },
   }

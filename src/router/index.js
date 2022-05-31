@@ -9,6 +9,7 @@ import Register from '../components/Register.vue'
 import Recipes from '../components/Recipes.vue'
 import Ingredients from '../components/Ingredients.vue'
 import MyIngredients from '../components/MyIngredients.vue'
+import RecipeDetails from '../components/RecipeDetails.vue'
 
 Vue.use(VueRouter)
 
@@ -50,6 +51,10 @@ const routes = [
         path: '',
         name: 'RecipeList',
         component: Recipes,
+      },
+      {
+        path: 'recipe/:id',
+        component: RecipeDetails,
       },
     ],
   },

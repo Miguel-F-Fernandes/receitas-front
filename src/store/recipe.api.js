@@ -18,6 +18,10 @@ export default {
       context.commit('set', response.data)
       return response.data
     },
+    async getById(context, { id }) {
+      let response = await axios.get('/recipes', { params: { id } })
+      return response.data && response.data.length ? response.data[0] : null
+    },
   },
   modules: {},
   getters: {},

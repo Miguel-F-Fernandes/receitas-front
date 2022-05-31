@@ -1,0 +1,125 @@
+<template>
+  <v-container>
+    <!-- TODO: skeleton -->
+    <div v-if="loading"></div>
+
+    <div v-else>
+      <div class="d-flex flex-no-wrap justify-start">
+        <v-img height="300" width="300" :src="recipe.image" :contain="true"></v-img>
+
+        <div class="d-flex flex-column">
+          <p class="text-h2">{{ recipe.name }}</p>
+
+          <div>
+            <v-row class="mx-0 my-4">
+              <v-rating :value="recipe.hardness" :length="10" dense readonly class="ml-auto">
+                <template v-slot:item="props">
+                  <v-icon :color="props.isFilled ? 'brown' : 'grey lighten-1'">
+                    mdi-glass-cocktail
+                  </v-icon>
+                </template>
+              </v-rating>
+            </v-row>
+
+            <v-row class="mx-0 my-4">
+              <v-rating :value="recipe.sweetness" :length="10" dense readonly class="ml-auto">
+                <template v-slot:item="props">
+                  <v-icon :color="props.isFilled ? 'pink lighten-2' : 'grey lighten-1'">
+                    mdi-candy
+                  </v-icon>
+                </template>
+              </v-rating>
+            </v-row>
+          </div>
+
+          <p class="text-body-2 text-justify">{{ recipe.description }}</p>
+        </div>
+      </div>
+
+      <v-divider></v-divider>
+
+      <v-card class="grey lighten-3">
+        <v-card-subtitle
+          >Copo recomendado:
+          <span class="font-weight-bold">{{ recipe.serve_in }}</span></v-card-subtitle
+        >
+
+        <v-divider></v-divider>
+
+        <v-card-text>
+          <v-btn-toggle v-model="amountType" mandatory dense style="float: right;">
+            <v-btn v-for="type in amountTypes" :key="type" :value="type">
+              {{ type }}
+            </v-btn>
+          </v-btn-toggle>
+
+          <v-list dense class="grey lighten-3">
+            <v-list-item v-for="(ingredient, index) in recipe.ingredients" :key="index">
+              <v-list-item-action>
+                <v-list-item-action-text style="width: 75px;">
+                  {{ ingredient.amount[amountType] }}
+                </v-list-item-action-text>
+              </v-list-item-action>
+
+              <v-list-item-content>
+                <v-list-item-title class="font-weight-regular">{{
+                  ingredient.ingredient.name
+                }}</v-list-item-title>
+              </v-list-item-content>
+            </v-list-item>
+          </v-list>
+        </v-card-text>
+
+        <v-divider></v-divider>
+
+        <v-card-text class="font-weight-medium">
+          {{ recipe.steps }}
+        </v-card-text>
+      </v-card>
+
+      <div class="d-flex justify-space-between">
+        <v-card-subtitle
+          >Teor alcoólico:
+          <span class="font-weight-medium">{{ recipe.alcohol_content }}%</span></v-card-subtitle
+        >
+
+        <v-card-subtitle
+          >Calorias: <span class="font-weight-bold">{{ recipe.calories }}</span></v-card-subtitle
+        >
+      </div>
+    </div>
+  </v-container>
+</template>
+<script>
+  export default {
+    data: () => ({
+      recipe: null,
+      loading: true,
+      amountType: 'ml',
+      amountTypes: [],
+    }),
+
+    async beforeCreate() {
+      try {
+        this.recipe = await this.$store.dispatch('recipe/getById', {
+          id: this.$route.params.id,
+        })
+        this.amountTypes = Object.keys(this.recipe.ingredients[0].amount)
+      } catch (err) {
+        this.$router.push({
+          name: 'RecipeList',
+        })
+      }
+      this.loading = false
+    },
+
+    methods: {},
+  }
+</script>
+
+<style scoped lang="scss">
+  p,
+  .v-card__title {
+    word-break: keep-all;
+  }
+</style>
