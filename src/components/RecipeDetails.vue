@@ -40,8 +40,7 @@
 
       <v-card class="grey lighten-3">
         <v-card-subtitle
-          >Copo recomendado:
-          <span class="font-weight-bold">{{ recipe.serve_in }}</span></v-card-subtitle
+          >Serve in: <span class="font-weight-bold">{{ recipe.serve_in }}</span></v-card-subtitle
         >
 
         <v-divider></v-divider>
@@ -79,12 +78,12 @@
 
       <div class="d-flex justify-space-between">
         <v-card-subtitle
-          >Teor alcoólico:
+          >Alcohol content:
           <span class="font-weight-medium">{{ recipe.alcohol_content }}%</span></v-card-subtitle
         >
 
         <v-card-subtitle
-          >Calorias: <span class="font-weight-bold">{{ recipe.calories }}</span></v-card-subtitle
+          >Calories: <span class="font-weight-bold">{{ recipe.calories }}</span></v-card-subtitle
         >
       </div>
     </div>

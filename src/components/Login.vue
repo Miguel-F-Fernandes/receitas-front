@@ -3,7 +3,7 @@
     <v-row>
       <v-col>
         <p class="caption">
-          Se quiser testar use as credenciais de demo:
+          If you'd just like to test it out, try the demo credentials:
           <v-btn
             v-on:click="demoLogin()"
             color="accent darken-1"
@@ -11,7 +11,7 @@
             :disabled="loading"
             class="ml-2"
           >
-            Login demo
+            Demo login
           </v-btn>
         </p>
       </v-col>
@@ -32,7 +32,7 @@
       </v-row>
       <v-row>
         <v-text-field
-          label="Senha"
+          label="Password"
           v-model="password"
           required
           :error-messages="passwordErrors"
@@ -52,7 +52,7 @@
 
     <v-row class="mt-10">
       <v-btn block v-on:click="register()" color="primary darken-2">
-        Ainda não tem conta? Faça seu cadastro aqui
+        Don't have an account yet? Sign-up here
       </v-btn>
     </v-row>
 
@@ -78,7 +78,7 @@
       email: null,
       password: null,
       snackbar: {
-        msg: 'Erro ao realizar login',
+        msg: 'Error when trying to login',
         show: false,
         timeout: 2000,
       },
@@ -155,14 +155,14 @@
       emailErrors() {
         const errors = []
         if (!this.$v.email.$dirty) return errors
-        !this.$v.email.required && errors.push('Insira um email')
-        !this.$v.email.email && errors.push('Insira um email válido')
+        !this.$v.email.required && errors.push('Insert an email')
+        !this.$v.email.email && errors.push('Insert a valid email')
         return errors
       },
       passwordErrors() {
         const errors = []
         if (!this.$v.password.$dirty) return errors
-        !this.$v.password.required && errors.push('Insira a senha')
+        !this.$v.password.required && errors.push('Insert password')
         return errors
       },
     },

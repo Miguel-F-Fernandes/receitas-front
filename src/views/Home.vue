@@ -37,7 +37,7 @@
           </v-list-item-icon>
 
           <v-list-item-content>
-            <v-list-item-title>Receitas</v-list-item-title>
+            <v-list-item-title>Recipes</v-list-item-title>
           </v-list-item-content>
         </v-list-item>
 
@@ -47,7 +47,7 @@
           </v-list-item-icon>
 
           <v-list-item-content>
-            <v-list-item-title>Ingredientes</v-list-item-title>
+            <v-list-item-title>Ingredients</v-list-item-title>
           </v-list-item-content>
         </v-list-item>
 
@@ -57,7 +57,7 @@
           </v-list-item-icon>
 
           <v-list-item-content>
-            <v-list-item-title>Meu armário</v-list-item-title>
+            <v-list-item-title>My cabinet</v-list-item-title>
           </v-list-item-content>
         </v-list-item>
       </v-list>

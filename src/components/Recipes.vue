@@ -1,6 +1,6 @@
 <template>
   <div>
-    <Search label="Buscar receitas" @update="search = $event" :fields="fields"></Search>
+    <Search label="Search recipes" @update="search = $event" :fields="fields"></Search>
 
     <div class="d-flex flex-wrap">
       <v-skeleton-loader
@@ -21,9 +21,7 @@
       ></RecipeCard>
     </div>
 
-    <infinite-loading @infinite="infiniteHandler">
-      <div slot="no-more" class="text-body-2 text--secondary">Fim dos resultados</div>
-    </infinite-loading>
+    <infinite-loading @infinite="infiniteHandler"></infinite-loading>
   </div>
 </template>
 

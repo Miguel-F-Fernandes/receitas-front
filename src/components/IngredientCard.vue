@@ -15,7 +15,7 @@
           </v-row>
 
           <div class="font-weight-light cursor-pointer" @click="goToRecipes()">
-            {{ ingredient._count.recipes }} receita{{ ingredient._count.recipes > 1 ? 's' : '' }}
+            {{ ingredient._count.recipes }} recipe{{ ingredient._count.recipes > 1 ? 's' : '' }}
           </div>
         </v-card-text>
       </div>

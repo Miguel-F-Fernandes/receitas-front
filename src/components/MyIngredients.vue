@@ -25,9 +25,7 @@
       ></IngredientCard>
     </div>
 
-    <infinite-loading @infinite="infiniteHandler">
-      <div slot="no-more" class="text-body-2 text--secondary">Fim dos resultados</div>
-    </infinite-loading>
+    <infinite-loading @infinite="infiniteHandler"></infinite-loading>
   </div>
 </template>
 

@@ -3,7 +3,7 @@
     <form>
       <v-row>
         <v-text-field
-          label="Nome"
+          label="Name"
           v-model="name"
           required
           :error-messages="nameErrors"
@@ -27,7 +27,7 @@
       </v-row>
       <v-row>
         <v-text-field
-          label="Senha"
+          label="Password"
           v-model="password"
           required
           :error-messages="passwordErrors"
@@ -40,14 +40,14 @@
       </v-row>
       <v-row class="mt-5">
         <v-btn block v-on:click="register()" color="primary" :loading="loading" :disabled="loading">
-          Cadastrar-se
+          Sign-up
         </v-btn>
       </v-row>
     </form>
 
     <v-row class="mt-10">
       <v-btn block v-on:click="login()" color="primary darken-2">
-        Já possui conta? Faça login aqui
+        Already have an account? Login here
       </v-btn>
     </v-row>
 
@@ -74,7 +74,7 @@
       email: null,
       password: null,
       snackbar: {
-        msg: 'Erro ao realizar cadastro',
+        msg: 'Error when trying to sign-up',
         show: false,
         timeout: 2000,
       },
@@ -132,20 +132,20 @@
       nameErrors() {
         const errors = []
         if (!this.$v.name.$dirty) return errors
-        !this.$v.name.required && errors.push('Insira um nome')
+        !this.$v.name.required && errors.push('Insert a name')
         return errors
       },
       emailErrors() {
         const errors = []
         if (!this.$v.email.$dirty) return errors
-        !this.$v.email.required && errors.push('Insira um email')
-        !this.$v.email.email && errors.push('Insira um email válido')
+        !this.$v.email.required && errors.push('Insert an email')
+        !this.$v.email.email && errors.push('Insert a valid email')
         return errors
       },
       passwordErrors() {
         const errors = []
         if (!this.$v.password.$dirty) return errors
-        !this.$v.password.required && errors.push('Insira a senha')
+        !this.$v.password.required && errors.push('Insert password')
         return errors
       },
     },
