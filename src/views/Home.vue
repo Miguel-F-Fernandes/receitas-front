@@ -11,7 +11,7 @@
       <template v-slot:prepend>
         <v-list-item class="px-2" two-line v-if="user">
           <v-list-item-avatar style="margin-right: 23px">
-            <v-avatar color="primary lighten-3" size="40">
+            <v-avatar color="primary" size="40" style="color: white">
               {{
                 user.name
                   .split(' ')

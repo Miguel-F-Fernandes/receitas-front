@@ -1,6 +1,6 @@
 <template>
   <div>
-    <Search label="Buscar receitas" @update="search = $event"></Search>
+    <Search label="Buscar receitas" @update="search = $event" :fields="fields"></Search>
 
     <div class="d-flex flex-wrap">
       <v-skeleton-loader
@@ -41,10 +41,12 @@
       loading: true,
       allRecipes: [],
       search: {},
+      fields: null,
     }),
 
     async beforeCreate() {
       this.allRecipes = await this.$store.dispatch('recipe/get')
+      this.fields = await this.$store.dispatch('recipe/getFields')
       this.loading = false
       if (
         Object.keys(this.$route.query) &&
@@ -57,10 +59,15 @@
     watch: {
       async search(newValue) {
         this.allRecipes = await this.$store.dispatch('recipe/get', newValue)
-        this.respondToRouteChanges = false
-        this.$router.replace({ query: newValue }).finally(() => {
-          this.respondToRouteChanges = true
-        })
+
+        this.$router
+          .push({
+            query: newValue,
+            replace: true,
+          })
+          .catch(err => {
+            if (err.name !== 'NavigationDuplicated') throw err
+          })
       },
     },
 

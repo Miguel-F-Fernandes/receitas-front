@@ -1,6 +1,6 @@
 <template>
   <div>
-    <Search label="Buscar ingredientes" @update="search = $event"></Search>
+    <Search label="Search ingredients" @update="search = $event" :fields="fields"></Search>
 
     <div class="d-flex flex-wrap">
       <v-skeleton-loader
@@ -21,9 +21,7 @@
       ></IngredientCard>
     </div>
 
-    <infinite-loading @infinite="infiniteHandler">
-      <div slot="no-more" class="text-body-2 text--secondary">Fim dos resultados</div>
-    </infinite-loading>
+    <infinite-loading @infinite="infiniteHandler"></infinite-loading>
   </div>
 </template>
 
@@ -41,10 +39,12 @@
       loading: true,
       allIngredients: [],
       search: {},
+      fields: null,
     }),
 
     async beforeCreate() {
       this.allIngredients = await this.$store.dispatch('ingredient/get')
+      this.fields = await this.$store.dispatch('ingredient/getFields')
       this.loading = false
       if (
         Object.keys(this.$route.query) &&
@@ -57,10 +57,15 @@
     watch: {
       async search(newValue) {
         this.allIngredients = await this.$store.dispatch('ingredient/get', newValue)
-        this.respondToRouteChanges = false
-        this.$router.replace({ query: newValue }).finally(() => {
-          this.respondToRouteChanges = true
-        })
+
+        this.$router
+          .push({
+            query: newValue,
+            replace: true,
+          })
+          .catch(err => {
+            if (err.name !== 'NavigationDuplicated') throw err
+          })
       },
     },
 

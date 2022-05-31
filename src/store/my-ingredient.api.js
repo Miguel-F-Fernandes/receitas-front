@@ -18,6 +18,10 @@ export default {
       context.commit('set', response.data)
       return response.data
     },
+    async getFields(context) {
+      let response = await axios.get('/my-ingredients/fields')
+      return response.data
+    },
   },
   modules: {},
   getters: {},
