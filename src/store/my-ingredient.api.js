@@ -22,6 +22,16 @@ export default {
       let response = await axios.get('/my-ingredients/fields')
       return response.data
     },
+    async add(context, { id }) {
+      await axios.patch('/my-ingredients', {
+        add: [id],
+      })
+    },
+    async remove(context, { id }) {
+      await axios.patch('/my-ingredients', {
+        remove: [id],
+      })
+    },
   },
   modules: {},
   getters: {},
