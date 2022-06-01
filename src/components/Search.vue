@@ -185,7 +185,11 @@
         let query = {}
         this.advancedSearch.forEach(search => {
           if (!search.field || !search.op || search.value === null) return
-          query[`${search.field}[${search.op}]`] = search.value
+          if (search.op === 'eq') {
+            query[search.field] = search.value
+          } else {
+            query[`${search.field}[${search.op}]`] = search.value
+          }
         })
 
         if (!Object.keys(query).length) return undefined
