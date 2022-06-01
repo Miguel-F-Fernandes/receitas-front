@@ -28,18 +28,30 @@
         v-for="n in 25"
         :key="n"
         type="card, paragraph"
-        min-width="350"
+        min-width="400"
         class="mx-auto mb-5 pa-3"
         elevation="2"
       ></v-skeleton-loader>
 
-      <!-- TODO trocar por card só com nome e com botao pra remover -->
-      <IngredientCard
-        v-for="ingredient in allIngredients"
+      <v-card
+        width="260"
+        class="d-flex mx-auto mb-5"
+        v-for="(ingredient, index) in allIngredients"
         :key="ingredient.id"
-        :ingredient="ingredient"
-        class="mx-auto mb-5"
-      ></IngredientCard>
+      >
+        <div class="d-flex justify-space-between" style="width: 100%">
+          <div class="d-flex flex-column justify-space-between">
+            <v-card-title>{{ ingredient.name }}</v-card-title>
+            <v-card-text class="font-weight-light cursor-pointer" @click="goToRecipes(ingredient)">
+              {{ ingredient._count.recipes }} recipe{{ ingredient._count.recipes > 1 ? 's' : '' }}
+            </v-card-text>
+          </div>
+
+          <v-btn icon color="red darken-4" @click="remove(index)">
+            <v-icon>mdi-trash-can-outline</v-icon>
+          </v-btn>
+        </div>
+      </v-card>
     </div>
 
     <infinite-loading @infinite="infiniteHandler"></infinite-loading>
@@ -47,13 +59,7 @@
 </template>
 
 <script>
-  import IngredientCard from '@/components/IngredientCard.vue'
-
   export default {
-    components: {
-      IngredientCard,
-    },
-
     data: () => ({
       loading: true,
       allIngredients: [],
@@ -178,8 +184,29 @@
       filterBackend(item) {
         return !this.allIngredients.find(myItem => myItem.id === item.id)
       },
+
+      async remove(index) {
+        let item = this.allIngredients.splice(index, 1)[0]
+        await this.$store.dispatch('my-ingredient/remove', { id: item.id })
+      },
+
+      goToRecipes(ingredient) {
+        this.$router.push({
+          path: '/',
+          query: {
+            'ingredients[ingredient][id]': ingredient.id,
+          },
+        })
+      },
     },
   }
 </script>
 
-<style scoped lang="scss"></style>
+<style scoped lang="scss">
+  .v-card__title {
+    word-break: keep-all;
+  }
+  .cursor-pointer {
+    cursor: pointer;
+  }
+</style>

@@ -35,14 +35,12 @@
       },
 
       goToRecipes() {
-        this.$router
-          .push({
-            path: '/',
-            query: {
-              'ingredients[ingredient][id]': this.ingredient.id,
-            },
-          })
-          .catch(() => {})
+        this.$router.push({
+          path: '/',
+          query: {
+            'ingredients[ingredient][id]': this.ingredient.id,
+          },
+        })
       },
     },
   }
