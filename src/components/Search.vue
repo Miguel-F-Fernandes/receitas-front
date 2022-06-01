@@ -107,20 +107,33 @@
       },
       advancedSearch: [],
       operations: [
+        { value: 'eq', text: 'equals' },
+        { value: 'not_eq', text: 'not equal to' },
+        { value: 'in', text: 'in' },
+        { value: 'not_in', text: 'not in' },
         { value: 'contains', text: 'contains' },
         { value: 'not_contains', text: "doesn't contain" },
+        { value: 'blank', text: 'is blank' },
         { value: 'gt', text: 'greater than' },
         { value: 'lt', text: 'less than' },
         { value: 'gt_or_eq', text: 'equal or greater than' },
         { value: 'lt_or_eq', text: 'equal or less than' },
-        { value: 'blank', text: 'is blank' },
-        { value: 'eq', text: 'equal' },
-        { value: 'not_eq', text: 'not equal' },
-        { value: 'in', text: 'in' },
-        { value: 'not_in', text: 'not in' },
       ],
       advancedFields: [],
     }),
+
+    created() {
+      // watch for any changes to the url to update advancedSearch values
+      this.$watch(
+        () => this.$route.query,
+        (to, from) => {
+          if (JSON.stringify(from) === JSON.stringify(to)) return
+          this.buildAdvancedSearchArray(to)
+        }
+      )
+
+      this.buildAdvancedSearchArray(this.$route.query)
+    },
 
     watch: {
       search() {
@@ -214,6 +227,36 @@
 
       removeField(index) {
         this.advancedSearch.splice(index, 1)
+      },
+
+      buildAdvancedSearchArray(query) {
+        let searchArray = []
+        // update valus in advancedSearch according to route query values
+        Object.keys(query).forEach(key => {
+          // get last value between brackets
+          let op = key.match(/([^[\]]*)(?=]$)/)
+          if (op && this.operations.find(operation => operation.value === op[0])) {
+            // check if it's a valid operation
+            op = op[0]
+          } else {
+            // otherwise it's the equality operator
+            op = 'eq'
+          }
+          // remove operation from key
+          let newKey = key.replace(new RegExp(`${op}]$`), '').replace(/\[$/, '')
+          searchArray.push({
+            field: newKey,
+            op: op,
+            value: this.$route.query[key],
+          })
+        })
+
+        this.advancedSearch = searchArray
+        if (this.advancedSearch.length) {
+          this.advancedSearchActive = true
+        } else {
+          this.advancedSearchActive = false
+        }
       },
     },
   }
