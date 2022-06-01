@@ -28,6 +28,46 @@
         </v-list-item>
       </template>
 
+      <template v-slot:append>
+        <v-list dense>
+          <v-dialog max-width="600" v-model="feedbackDialog">
+            <template v-slot:activator="{ on, attrs }">
+              <v-list-item v-bind="attrs" v-on="on">
+                <v-list-item-icon>
+                  <v-icon>mdi-message-alert-outline</v-icon>
+                </v-list-item-icon>
+
+                <v-list-item-content>
+                  <v-list-item-title>Feedback</v-list-item-title>
+                </v-list-item-content>
+              </v-list-item>
+            </template>
+
+            <v-card>
+              <v-card-title class="text-h5">
+                Give us your feedback
+              </v-card-title>
+              <v-card-text
+                >Feel free to leave us an anonymous message with any part of our system you would
+                like us to improve, or possible feature you would like to see implemented in the
+                future. 😁
+              </v-card-text>
+
+              <v-card-subtitle>
+                <v-textarea outlined auto-grow v-model="feedback" hide-details="auto"></v-textarea>
+              </v-card-subtitle>
+
+              <v-card-actions>
+                <v-spacer></v-spacer>
+                <v-btn color="green darken-1" text @click="sendFeedback">
+                  Send
+                </v-btn>
+              </v-card-actions>
+            </v-card>
+          </v-dialog>
+        </v-list>
+      </template>
+
       <v-divider></v-divider>
 
       <v-list dense>
@@ -95,6 +135,11 @@
   import { mapState } from 'vuex'
 
   export default {
+    data: () => ({
+      feedback: null,
+      feedbackDialog: false,
+    }),
+
     mounted() {
       let token = localStorage.getItem('token')
       if ('token' in localStorage && token !== undefined && token !== null) {
@@ -116,8 +161,16 @@
           })
         }
       },
-      logout: async function() {
+      async logout() {
         await this.$store.dispatch('auth/logout')
+      },
+      async sendFeedback() {
+        if (!this.feedback) {
+          this.feedbackDialog = false
+        }
+        await this.$store.dispatch('feedback/submit', { text: this.feedback })
+        this.feedbackDialog = false
+        this.feedback = null
       },
     },
   }

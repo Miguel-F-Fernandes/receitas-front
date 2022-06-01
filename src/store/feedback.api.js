@@ -9,7 +9,7 @@ export default {
   actions: {
     // asynchronous
     async submit(context, { text }) {
-      let response = await axios.post('/auth/feedback', { text: text })
+      let response = await axios.post('/feedback', { text })
     },
   },
   modules: {},
