@@ -3,13 +3,14 @@ import VueRouter from 'vue-router'
 
 import Store from '@/store/index.js'
 
-import Home from '../views/Home.vue'
-import Login from '../components/Login.vue'
-import Register from '../components/Register.vue'
-import Recipes from '../components/Recipes.vue'
-import Ingredients from '../components/Ingredients.vue'
-import MyIngredients from '../components/MyIngredients.vue'
-import RecipeDetails from '../components/RecipeDetails.vue'
+import Home from '@/views/Home.vue'
+import Login from '@/components/Login.vue'
+import Register from '@/components/Register.vue'
+import Recipes from '@/components/Recipes.vue'
+import Ingredients from '@/components/Ingredients.vue'
+import MyIngredients from '@/components/MyIngredients.vue'
+import RecipeDetails from '@/components/RecipeDetails.vue'
+import NotFound from '@/components/NotFound.vue'
 
 Vue.use(VueRouter)
 
@@ -55,6 +56,11 @@ const routes = [
       {
         path: 'recipe/:id',
         component: RecipeDetails,
+      },
+      {
+        path: ':pathMatch(.*)*',
+        name: 'NotFound',
+        component: NotFound,
       },
     ],
   },
