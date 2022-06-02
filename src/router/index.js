@@ -47,6 +47,7 @@ const routes = [
         path: 'my-ingredients',
         name: 'MyIngredientList',
         component: MyIngredients,
+        meta: { requiresAuth: true },
       },
       {
         path: '',

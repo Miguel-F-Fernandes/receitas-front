@@ -163,6 +163,14 @@
       },
       async logout() {
         await this.$store.dispatch('auth/logout')
+        // check if current route needs authentication
+        this.$router.currentRoute.matched.forEach(route => {
+          if (route.meta.requiresAuth) {
+            this.$router.push({
+              path: '/',
+            })
+          }
+        })
       },
       async sendFeedback() {
         if (!this.feedback) {
