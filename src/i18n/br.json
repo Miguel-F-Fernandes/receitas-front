@@ -92,5 +92,12 @@
     "search": "Buscar ingredientes para adicionar ao meu armário",
     "recipe": "receita",
     "search-placeholder": "Comece a digitar para buscar"
+  },
+  "toolbar-title": {
+    "Login": "Login",
+    "Register": "Cadastro",
+    "IngredientList": "Ingredientes",
+    "MyIngredientList": "Meu armário",
+    "RecipeList": "Coquetéis"
   }
 }

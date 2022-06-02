@@ -1,12 +1,23 @@
 <template>
-  <v-container style="height: 100%">
+  <div style="height: 100%">
+    <v-expand-transition>
+      <v-toolbar v-if="$vuetify.breakpoint.mdAndDown && !drawer" dense color="grey lighten-3">
+        <v-app-bar-nav-icon @click.stop="drawer = !drawer"></v-app-bar-nav-icon>
+
+        <v-toolbar-title>{{
+          this.$route.name ? $i18n.t(`toolbar-title.${this.$route.name}`) : ''
+        }}</v-toolbar-title>
+      </v-toolbar>
+    </v-expand-transition>
+
     <v-navigation-drawer
       absolute
-      permanent
-      expand-on-hover
+      :permanent="$vuetify.breakpoint.mdAndUp"
+      :expand-on-hover="$vuetify.breakpoint.mdAndUp"
       app
       style="position: fixed"
       class="grey lighten-3"
+      v-model="drawer"
     >
       <template v-slot:prepend>
         <v-list-item class="px-2" two-line v-if="user">
@@ -154,8 +165,10 @@
       </v-list>
     </v-navigation-drawer>
 
-    <router-view></router-view>
-  </v-container>
+    <v-container style="height: 100%">
+      <router-view></router-view>
+    </v-container>
+  </div>
 </template>
 
 <script>
@@ -163,6 +176,7 @@
 
   export default {
     data: () => ({
+      drawer: false,
       feedback: null,
       feedbackDialog: false,
       langs: ['en', 'br'],
@@ -189,6 +203,7 @@
           })
         }
       },
+
       async logout() {
         await this.$store.dispatch('auth/logout')
         // check if current route needs authentication
@@ -200,6 +215,7 @@
           }
         })
       },
+
       async sendFeedback() {
         if (!this.feedback) {
           this.feedbackDialog = false
@@ -214,6 +230,9 @@
 </script>
 
 <style scoped lang="scss">
+  .v-card__title {
+    word-break: keep-all;
+  }
   .language {
     heith: 24px;
     width: 24px;

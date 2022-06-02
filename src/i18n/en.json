@@ -92,5 +92,12 @@
     "search": "Search ingredients to add to cabinet",
     "recipe": "recipe",
     "search-placeholder": "Start typing to search"
+  },
+  "toolbar-title": {
+    "Login": "Login",
+    "Register": "Register",
+    "IngredientList": "Ingredients",
+    "MyIngredientList": "My cabinet",
+    "RecipeList": "Recipes"
   }
 }
