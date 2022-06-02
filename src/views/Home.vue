@@ -7,6 +7,57 @@
         <v-toolbar-title>{{
           this.$route.name ? $i18n.t(`toolbar-title.${this.$route.name}`) : ''
         }}</v-toolbar-title>
+
+        <v-spacer></v-spacer>
+
+        <v-menu top close-on-click>
+          <template v-slot:activator="{ on, attrs }">
+            <v-btn icon v-bind="attrs" v-on="on">
+              <div class="language">
+                {{ $i18n.locale.toUpperCase() }}
+              </div>
+            </v-btn>
+          </template>
+
+          <v-list>
+            <v-list-item
+              v-for="(lang, index) in langs"
+              :key="index"
+              :value="lang"
+              @click="$i18n.locale = lang"
+            >
+              <v-list-item-title>{{ lang.toUpperCase() }}</v-list-item-title>
+            </v-list-item>
+          </v-list>
+        </v-menu>
+
+        <v-dialog max-width="600" v-model="feedbackDialog">
+          <template v-slot:activator="{ on, attrs }">
+            <v-btn icon v-bind="attrs" v-on="on">
+              <v-icon>mdi-message-alert-outline</v-icon>
+            </v-btn>
+          </template>
+
+          <v-card>
+            <v-card-title class="text-h5">
+              {{ $i18n.t('feedback.title') }}
+            </v-card-title>
+            <v-card-text>
+              {{ $i18n.t('feedback.body') }}
+            </v-card-text>
+
+            <v-card-subtitle>
+              <v-textarea outlined auto-grow v-model="feedback" hide-details="auto"></v-textarea>
+            </v-card-subtitle>
+
+            <v-card-actions>
+              <v-spacer></v-spacer>
+              <v-btn color="green darken-1" text @click="sendFeedback">
+                {{ $i18n.t('feedback.send') }}
+              </v-btn>
+            </v-card-actions>
+          </v-card>
+        </v-dialog>
       </v-toolbar>
     </v-expand-transition>
 
@@ -40,7 +91,7 @@
       </template>
 
       <template v-slot:append>
-        <v-list dense>
+        <v-list dense v-if="$vuetify.breakpoint.mdAndUp">
           <!-- language picker -->
           <v-menu top close-on-click>
             <template v-slot:activator="{ on, attrs }">
