@@ -18,7 +18,10 @@
     "email": "Email",
     "password": "Password",
     "register": "Sign-up",
-    "login": "Already have an account? Login here",
+    "login": {
+      "text": "Already have an account?",
+      "button": "Login here"
+    },
     "errors": {
       "name": "Insert a name",
       "email": "Insert an email",
@@ -35,7 +38,10 @@
     "email": "Email",
     "password": "Password",
     "login": "Login",
-    "register": "Don't have an account yet? Sign-up here",
+    "register": {
+      "text": "Don't have an account yet?",
+      "button": "Sign-up here"
+    },
     "errors": {
       "email": "Insert an email",
       "valid-email": "Insert a valid email",

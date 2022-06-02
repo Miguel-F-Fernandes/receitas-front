@@ -45,9 +45,15 @@
       </v-row>
     </form>
 
+    <v-divider class="mx-5"></v-divider>
+
     <v-row class="mt-10">
+      <p class="caption" v-if="$vuetify.breakpoint.mdAndDown">
+        {{ $i18n.t('register.login.text') }}
+      </p>
       <v-btn block v-on:click="login()" color="primary darken-2">
-        {{ $i18n.t('register.login') }}
+        {{ $vuetify.breakpoint.mdAndDown ? '' : $i18n.t('register.login.text') }}
+        {{ $i18n.t('register.login.button') }}
       </v-btn>
     </v-row>
 
