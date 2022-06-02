@@ -13,6 +13,7 @@ import './plugins/array'
 import './plugins/sentry'
 import { VuePlausible } from 'vue-plausible'
 import InfiniteLoading from 'vue-infinite-loading'
+import i18n from './plugins/i18n'
 
 Vue.use(Vuelidate)
 Vue.use(DatetimePicker)
@@ -28,5 +29,6 @@ new Vue({
   router,
   store,
   vuetify,
+  i18n,
   render: h => h(App),
 }).$mount('#app')

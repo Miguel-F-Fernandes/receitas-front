@@ -1,5 +1,6 @@
 module.exports = {
   transpileDependencies: ['vuetify'],
+
   chainWebpack: config => {
     config
       .plugin('html')
@@ -8,6 +9,7 @@ module.exports = {
         return args
       })
   },
+
   configureWebpack:{
     optimization: {
       splitChunks: {
@@ -16,10 +18,21 @@ module.exports = {
       }
     }
   },
+
   pwa: {
     name: 'Coquetéis',
     workboxOptions: {
       skipWaiting: true
     }
   },
+
+  pluginOptions: {
+    i18n: {
+      locale: 'en',
+      fallbackLocale: 'en',
+      localeDir: 'i18n',
+      enableInSFC: false,
+      enableBridge: false
+    }
+  }
 }
