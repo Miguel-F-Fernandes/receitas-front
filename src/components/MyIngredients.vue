@@ -9,8 +9,8 @@
       hide-selected
       item-text="name"
       item-value="id"
-      label="Search ingredients to add to cabinet"
-      placeholder="Start typing to search"
+      :label="$i18n.t('my-ingredients.search')"
+      :placeholder="$i18n.t('my-ingredients.search-placeholder')"
       prepend-icon="mdi-database-search"
       return-object
       dense
@@ -43,7 +43,8 @@
           <div class="d-flex flex-column justify-space-between">
             <v-card-title>{{ ingredient.name }}</v-card-title>
             <v-card-text class="font-weight-light cursor-pointer" @click="goToRecipes(ingredient)">
-              {{ ingredient._count.recipes }} recipe{{ ingredient._count.recipes > 1 ? 's' : '' }}
+              {{ ingredient._count.recipes }} {{ $i18n.t('my-ingredients.recipe')
+              }}{{ ingredient._count.recipes > 1 ? 's' : '' }}
             </v-card-text>
           </div>
 

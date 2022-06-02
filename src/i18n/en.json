@@ -1,3 +1,96 @@
 {
-  "message": "hello i18n !!"
+  "menu":{
+    "language": "Change language",
+    "recipes": "Recipes",
+    "ingredients": "Ingredients",
+    "my-ingredients": "My cabinet",
+    "login": "Login",
+    "logout": "Logout",
+    "feedback": "Feedback"
+  },
+  "feedback": {
+    "title": "Give us your feedback",
+    "body": "Feel free to leave us an anonymous message with any part of our system you would like us to improve, or possible feature you would like to see implemented in the future. 😁",
+    "send": "Send"
+  },
+  "register": {
+    "name": "Name",
+    "email": "Email",
+    "password": "Password",
+    "register": "Sign-up",
+    "login": "Already have an account? Login here",
+    "errors": {
+      "name": "Insert a name",
+      "email": "Insert an email",
+      "valid-email": "Insert a valid email",
+      "password": "Insert password"
+    }
+  },
+  "login": {
+    "demo": {
+      "text": "If you'd just like to test it out, try the demo credentials:",
+      "button": "Demo login"
+    },
+    "name": "Name",
+    "email": "Email",
+    "password": "Password",
+    "login": "Login",
+    "register": "Don't have an account yet? Sign-up here",
+    "errors": {
+      "email": "Insert an email",
+      "valid-email": "Insert a valid email",
+      "password": "Insert password"
+    }
+  },
+  "not-found":{
+    "text": "Page not found",
+    "redirecting": "Redirecting you in"
+  },
+  "search": {
+    "field": "Field",
+    "operation": "Operation",
+    "value": "Value",
+    "add-field": "Add field",
+    "operations": {
+      "eq": "equals",
+      "not_eq": "not equal to",
+      "in": "in",
+      "not_in": "not in",
+      "contains": "contains",
+      "not_contains": "doesn't contain",
+      "blank": "is blank",
+      "gt": "greater than",
+      "lt": "less than",
+      "gt_or_eq": "equal or greater than",
+      "lt_or_eq": "equal or less than"
+    },
+    "value-blank":{
+      "true": "True",
+      "false": "False"
+    },
+    "button": {
+      "simple": "Simple search",
+      "advanced": "Advanced search"
+    }
+  },
+  "recipe-details": {
+    "loading": "Loading",
+    "serve-in": "Serve in",
+    "alcohol-content": "Alcohol content",
+    "calories": "Calories"
+  },
+  "ingredient-card":{
+    "recipe": "recipe"
+  },
+  "recipes": {
+    "search": "Search recipes"
+  },
+  "ingredients": {
+    "search": "Search ingredients"
+  },
+  "my-ingredients": {
+    "search": "Search ingredients to add to cabinet",
+    "recipe": "recipe",
+    "search-placeholder": "Start typing to search"
+  }
 }

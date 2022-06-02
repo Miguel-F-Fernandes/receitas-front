@@ -1,6 +1,6 @@
 <template>
   <div>
-    <Search label="Search recipes" @update="search = $event" :fields="fields"></Search>
+    <Search :label="$i18n.t('recipes.search')" @update="search = $event" :fields="fields"></Search>
 
     <div class="d-flex flex-wrap">
       <v-skeleton-loader

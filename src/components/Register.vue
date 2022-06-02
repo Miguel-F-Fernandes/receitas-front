@@ -3,7 +3,7 @@
     <form>
       <v-row>
         <v-text-field
-          label="Name"
+          :label="$i18n.t('register.name')"
           v-model="name"
           required
           :error-messages="nameErrors"
@@ -15,7 +15,7 @@
       </v-row>
       <v-row>
         <v-text-field
-          label="Email"
+          :label="$i18n.t('register.email')"
           v-model="email"
           required
           :error-messages="emailErrors"
@@ -27,7 +27,7 @@
       </v-row>
       <v-row>
         <v-text-field
-          label="Password"
+          :label="$i18n.t('register.password')"
           v-model="password"
           required
           :error-messages="passwordErrors"
@@ -40,14 +40,14 @@
       </v-row>
       <v-row class="mt-5">
         <v-btn block v-on:click="register()" color="primary" :loading="loading" :disabled="loading">
-          Sign-up
+          {{ $i18n.t('register.register') }}
         </v-btn>
       </v-row>
     </form>
 
     <v-row class="mt-10">
       <v-btn block v-on:click="login()" color="primary darken-2">
-        Already have an account? Login here
+        {{ $i18n.t('register.login') }}
       </v-btn>
     </v-row>
 
@@ -132,20 +132,20 @@
       nameErrors() {
         const errors = []
         if (!this.$v.name.$dirty) return errors
-        !this.$v.name.required && errors.push('Insert a name')
+        !this.$v.name.required && errors.push(this.$i18n.t('register.errors.name'))
         return errors
       },
       emailErrors() {
         const errors = []
         if (!this.$v.email.$dirty) return errors
-        !this.$v.email.required && errors.push('Insert an email')
-        !this.$v.email.email && errors.push('Insert a valid email')
+        !this.$v.email.required && errors.push(this.$i18n.t('register.errors.email'))
+        !this.$v.email.email && errors.push(this.$i18n.t('register.errors.valid-email'))
         return errors
       },
       passwordErrors() {
         const errors = []
         if (!this.$v.password.$dirty) return errors
-        !this.$v.password.required && errors.push('Insert password')
+        !this.$v.password.required && errors.push(this.$i18n.t('register.errors.password'))
         return errors
       },
     },

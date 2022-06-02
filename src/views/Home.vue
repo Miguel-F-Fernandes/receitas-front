@@ -41,7 +41,7 @@
                 </v-list-item-icon>
 
                 <v-list-item-content>
-                  <v-list-item-title>Change language</v-list-item-title>
+                  <v-list-item-title>{{ $i18n.t('menu.language') }}</v-list-item-title>
                 </v-list-item-content>
               </v-list-item>
             </template>
@@ -67,19 +67,17 @@
                 </v-list-item-icon>
 
                 <v-list-item-content>
-                  <v-list-item-title>Feedback</v-list-item-title>
+                  <v-list-item-title>{{ $i18n.t('menu.feedback') }}</v-list-item-title>
                 </v-list-item-content>
               </v-list-item>
             </template>
 
             <v-card>
               <v-card-title class="text-h5">
-                Give us your feedback
+                {{ $i18n.t('feedback.title') }}
               </v-card-title>
-              <v-card-text
-                >Feel free to leave us an anonymous message with any part of our system you would
-                like us to improve, or possible feature you would like to see implemented in the
-                future. 😁
+              <v-card-text>
+                {{ $i18n.t('feedback.body') }}
               </v-card-text>
 
               <v-card-subtitle>
@@ -89,7 +87,7 @@
               <v-card-actions>
                 <v-spacer></v-spacer>
                 <v-btn color="green darken-1" text @click="sendFeedback">
-                  Send
+                  {{ $i18n.t('feedback.send') }}
                 </v-btn>
               </v-card-actions>
             </v-card>
@@ -106,7 +104,7 @@
           </v-list-item-icon>
 
           <v-list-item-content>
-            <v-list-item-title>Recipes</v-list-item-title>
+            <v-list-item-title>{{ $i18n.t('menu.recipes') }}</v-list-item-title>
           </v-list-item-content>
         </v-list-item>
 
@@ -116,7 +114,7 @@
           </v-list-item-icon>
 
           <v-list-item-content>
-            <v-list-item-title>Ingredients</v-list-item-title>
+            <v-list-item-title>{{ $i18n.t('menu.ingredients') }}</v-list-item-title>
           </v-list-item-content>
         </v-list-item>
 
@@ -126,7 +124,7 @@
           </v-list-item-icon>
 
           <v-list-item-content>
-            <v-list-item-title>My cabinet</v-list-item-title>
+            <v-list-item-title>{{ $i18n.t('menu.my-ingredients') }}</v-list-item-title>
           </v-list-item-content>
         </v-list-item>
       </v-list>
@@ -140,7 +138,7 @@
           </v-list-item-icon>
 
           <v-list-item-content>
-            <v-list-item-title>Logout</v-list-item-title>
+            <v-list-item-title>{{ $i18n.t('menu.logout') }}</v-list-item-title>
           </v-list-item-content>
         </v-list-item>
 
@@ -150,7 +148,7 @@
           </v-list-item-icon>
 
           <v-list-item-content>
-            <v-list-item-title>Login</v-list-item-title>
+            <v-list-item-title>{{ $i18n.t('menu.login') }}</v-list-item-title>
           </v-list-item-content>
         </v-list-item>
       </v-list>

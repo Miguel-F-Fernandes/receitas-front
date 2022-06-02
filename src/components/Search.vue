@@ -10,7 +10,7 @@
         :disabled="advancedSearchActive"
       ></v-text-field>
       <v-btn class="ml-3" elevation="2" color="primary" @click="toggleAdvancedSearch()">{{
-        advancedSearchActive ? searchTypeLabels.simple : searchTypeLabels.advanced
+        advancedSearchActive ? $i18n.t('search.button.simple') : $i18n.t('search.button.advanced')
       }}</v-btn>
     </v-row>
 
@@ -22,7 +22,7 @@
             :items="advancedFields"
             item-text="text"
             item-value="value"
-            label="Field"
+            :label="$i18n.t('search.field')"
             single-line
             outlined
             dense
@@ -36,7 +36,7 @@
             :items="operations"
             item-text="text"
             item-value="value"
-            label="Operation"
+            :label="$i18n.t('search.operation')"
             single-line
             outlined
             dense
@@ -47,7 +47,7 @@
         <v-col cols="4">
           <v-text-field
             v-if="!field.op || field.op !== 'blank'"
-            label="Value"
+            :label="$i18n.t('search.value')"
             outlined
             dense
             v-model="field.value"
@@ -58,12 +58,12 @@
             v-else
             v-model="field.value"
             :items="[
-              { text: 'True', value: true },
-              { text: 'False', value: false },
+              { text: $i18n.t('search.value-blank.true'), value: true },
+              { text: $i18n.t('search.value-blank.false'), value: false },
             ]"
             item-text="text"
             item-value="value"
-            label="Value"
+            :label="$i18n.t('search.value')"
             single-line
             outlined
             dense
@@ -83,7 +83,7 @@
 
       <v-row class="my-3">
         <v-btn block color="primary darken-2" @click="addField()">
-          Add field
+          {{ $i18n.t('search.add-field') }}
         </v-btn>
       </v-row>
     </div>
@@ -101,10 +101,6 @@
         timeout: null,
       },
       advancedSearchActive: false,
-      searchTypeLabels: {
-        simple: 'Simple search',
-        advanced: 'Advanced search',
-      },
       advancedSearch: [],
       operations: [
         { value: 'eq', text: 'equals' },
@@ -123,6 +119,10 @@
     }),
 
     created() {
+      // watch for changes to locale to update operations
+      this.setOperationsLocale()
+      this.$watch(() => this.$i18n.locale, this.setOperationsLocale)
+
       // watch for any changes to the url to update advancedSearch values
       this.$watch(
         () => this.$route.query,
@@ -261,6 +261,12 @@
         } else {
           this.advancedSearchActive = false
         }
+      },
+
+      setOperationsLocale() {
+        this.operations.forEach(op => {
+          op.text = this.$i18n.t(`search.operations.${op.value}`)
+        })
       },
     },
   }

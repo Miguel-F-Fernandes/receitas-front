@@ -1,6 +1,6 @@
 <template>
   <v-container>
-    <div v-if="loading">Loading...</div>
+    <div v-if="loading">{{ $i18n.t('recipe-details.loading') }}...</div>
 
     <div v-else>
       <div class="d-flex flex-no-wrap justify-start">
@@ -39,7 +39,8 @@
 
       <v-card class="grey lighten-3">
         <v-card-subtitle
-          >Serve in: <span class="font-weight-bold">{{ recipe.serve_in }}</span></v-card-subtitle
+          >{{ $i18n.t('recipe-details.serve-in') }}:
+          <span class="font-weight-bold">{{ recipe.serve_in }}</span></v-card-subtitle
         >
 
         <v-divider></v-divider>
@@ -77,12 +78,13 @@
 
       <div class="d-flex justify-space-between">
         <v-card-subtitle
-          >Alcohol content:
+          >{{ $i18n.t('recipe-details.alcohol-content') }}
           <span class="font-weight-medium">{{ recipe.alcohol_content }}%</span></v-card-subtitle
         >
 
         <v-card-subtitle
-          >Calories: <span class="font-weight-bold">{{ recipe.calories }}</span></v-card-subtitle
+          >{{ $i18n.t('recipe-details.calories') }}:
+          <span class="font-weight-bold">{{ recipe.calories }}</span></v-card-subtitle
         >
       </div>
     </div>

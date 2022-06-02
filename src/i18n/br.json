@@ -1,0 +1,96 @@
+{
+  "menu":{
+    "language": "Mudar língua",
+    "recipes": "Coquetéis",
+    "ingredients": "Ingredientes",
+    "my-ingredients": "Meu armário",
+    "login": "Login",
+    "logout": "Logout",
+    "feedback": "Feedback"
+  },
+  "feedback": {
+    "title": "Deixe aqui seu feedback",
+    "body": "Sinta-se livre para deixar uma mensagem anônima com alguma parte do sistema que você gostaria que fosse melhor, ou coisas que você gostaria de ver adicionadas ao sistema no futuro. 😁",
+    "send": "Enviar"
+  },
+  "register": {
+    "name": "Nome",
+    "email": "Email",
+    "password": "Senha",
+    "register": "Cadastrar-se",
+    "login": "Já tem uma conta? Faça login aqui",
+    "errors": {
+      "name": "Coloque um nome",
+      "email": "Coloque um email",
+      "valid-email": "Coloque um email válido",
+      "password": "Coloque uma senha"
+    }
+  },
+  "login": {
+    "demo": {
+      "text": "Se você gostaria de só testar o sistema, use as credenciais do demo:",
+      "button": "Login demo"
+    },
+    "name": "Nome",
+    "email": "Email",
+    "password": "Senha",
+    "login": "Login",
+    "register": "Ainda não tem uma conta? Cadastre-se aqui",
+    "errors": {
+      "email": "Coloque o email",
+      "valid-email": "Coloque um email válido",
+      "password": "Coloque a senha"
+    }
+  },
+  "not-found":{
+    "text": "Página não encontrada",
+    "redirecting": "Redirecionando em"
+  },
+  "search": {
+    "field": "Campo",
+    "operation": "Operação",
+    "value": "Valor",
+    "add-field": "Adicionar campo",
+    "operations": {
+      "eq": "igual a",
+      "not_eq": "diferente de",
+      "in": "dentre",
+      "not_in": "nenhum valor dentre",
+      "contains": "contém",
+      "not_contains": "não contém",
+      "blank": "está vazio",
+      "gt": "maior que",
+      "lt": "menor que",
+      "gt_or_eq": "maior ou igual a",
+      "lt_or_eq": "menor ou igual a"
+    },
+    "value-blank":{
+      "true": "sim",
+      "false": "não"
+    },
+    "button": {
+      "simple": "Busca simples",
+      "advanced": "Busca avançada"
+    }
+  },
+  "recipe-details": {
+    "loading": "Carregando",
+    "serve-in": "Copo recomendado",
+    "alcohol-content": "Conteúdo alcoólico",
+    "calories": "Calorias"
+  },
+  "ingredient-card":{
+    "recipe": "receita"
+  },
+  "recipes": {
+    "search": "Buscar receitas"
+  },
+  "ingredients": {
+    "search": "Buscar ingredientes"
+  },
+  "my-ingredients": {
+    "search": "Buscar ingredientes para adicionar ao meu armário",
+    "recipe": "receita",
+    "search-placeholder": "Comece a digitar para buscar"
+  }
+}

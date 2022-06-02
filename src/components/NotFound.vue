@@ -1,7 +1,7 @@
 <template>
   <v-container class="d-flex flex-column justify-center align-center" style="height: 100%">
-    <p class="text-h2">Page not found</p>
-    <p>Redirecting you in {{ count }} . . .</p>
+    <p class="text-h2">{{ $i18n.t('not-found.text') }}</p>
+    <p>{{ $i18n.t('not-found.redirecting') }} {{ count }} . . .</p>
   </v-container>
 </template>
 
