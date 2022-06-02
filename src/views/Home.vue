@@ -30,6 +30,35 @@
 
       <template v-slot:append>
         <v-list dense>
+          <!-- language picker -->
+          <v-menu top close-on-click>
+            <template v-slot:activator="{ on, attrs }">
+              <v-list-item v-bind="attrs" v-on="on">
+                <v-list-item-icon>
+                  <div class="language">
+                    {{ $i18n.locale.toUpperCase() }}
+                  </div>
+                </v-list-item-icon>
+
+                <v-list-item-content>
+                  <v-list-item-title>Change language</v-list-item-title>
+                </v-list-item-content>
+              </v-list-item>
+            </template>
+
+            <v-list>
+              <v-list-item
+                v-for="(lang, index) in langs"
+                :key="index"
+                :value="lang"
+                @click="$i18n.locale = lang"
+              >
+                <v-list-item-title>{{ lang.toUpperCase() }}</v-list-item-title>
+              </v-list-item>
+            </v-list>
+          </v-menu>
+
+          <!-- feedback dialog -->
           <v-dialog max-width="600" v-model="feedbackDialog">
             <template v-slot:activator="{ on, attrs }">
               <v-list-item v-bind="attrs" v-on="on">
@@ -138,6 +167,7 @@
     data: () => ({
       feedback: null,
       feedbackDialog: false,
+      langs: ['en', 'br'],
     }),
 
     mounted() {
@@ -184,4 +214,13 @@
   }
 </script>
 
-<style scoped lang="scss"></style>
+<style scoped lang="scss">
+  .language {
+    heith: 24px;
+    width: 24px;
+    line-height: 24px;
+    color: rgba(0, 0, 0, 0.54);
+    padding-left: 0.15em;
+    font-weight: bold;
+  }
+</style>
