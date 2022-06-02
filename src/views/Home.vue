@@ -203,6 +203,7 @@
       async sendFeedback() {
         if (!this.feedback) {
           this.feedbackDialog = false
+          return
         }
         await this.$store.dispatch('feedback/submit', { text: this.feedback })
         this.feedbackDialog = false
