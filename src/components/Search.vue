@@ -1,92 +1,132 @@
 <template>
   <v-container>
-    <v-row class="d-flex align-center mb-2">
-      <v-text-field
-        :label="label"
-        outlined
-        dense
-        v-model="search"
-        hide-details="auto"
-        :disabled="advancedSearchActive"
-      ></v-text-field>
-      <v-btn class="ml-3" elevation="2" color="primary" @click="toggleAdvancedSearch()">{{
-        advancedSearchActive ? $i18n.t('search.button.simple') : $i18n.t('search.button.advanced')
-      }}</v-btn>
+    <v-row v-if="$vuetify.breakpoint.mdAndUp">
+      <v-col class="d-flex align-center mb-2">
+        <v-text-field
+          :label="label"
+          outlined
+          dense
+          v-model="search"
+          hide-details="auto"
+          :disabled="advancedSearchActive"
+        ></v-text-field>
+        <v-btn class="ml-3" elevation="2" color="primary" @click="toggleAdvancedSearch()">{{
+          advancedSearchActive ? $i18n.t('search.button.simple') : $i18n.t('search.button.advanced')
+        }}</v-btn>
+      </v-col>
     </v-row>
 
-    <div v-if="advancedSearchActive">
-      <v-row class="d-flex align-center" v-for="(field, index) in advancedSearch" :key="index">
-        <v-col cols="4">
-          <v-select
-            v-model="field.field"
-            :items="advancedFields"
-            item-text="text"
-            item-value="value"
-            :label="$i18n.t('search.field')"
-            single-line
-            outlined
-            dense
-            hide-details="auto"
-          ></v-select>
-        </v-col>
-
-        <v-col cols="3">
-          <v-select
-            v-model="field.op"
-            :items="operations"
-            item-text="text"
-            item-value="value"
-            :label="$i18n.t('search.operation')"
-            single-line
-            outlined
-            dense
-            hide-details="auto"
-          ></v-select>
-        </v-col>
-
-        <v-col cols="4">
+    <v-row v-else>
+      <v-expand-transition>
+        <v-col cols="12" v-if="!advancedSearchActive">
           <v-text-field
-            v-if="!field.op || field.op !== 'blank'"
-            :label="$i18n.t('search.value')"
+            :label="label"
             outlined
             dense
-            v-model="field.value"
+            v-model="search"
             hide-details="auto"
           ></v-text-field>
-
-          <v-select
-            v-else
-            v-model="field.value"
-            :items="[
-              { text: $i18n.t('search.value-blank.true'), value: true },
-              { text: $i18n.t('search.value-blank.false'), value: false },
-            ]"
-            item-text="text"
-            item-value="value"
-            :label="$i18n.t('search.value')"
-            single-line
-            outlined
-            dense
-            hide-details="auto"
-          ></v-select>
         </v-col>
+      </v-expand-transition>
 
-        <v-btn
-          v-if="advancedSearch.length !== 1"
-          icon
-          color="red darken-4"
-          @click="removeField(index)"
-        >
-          <v-icon>mdi-trash-can-outline</v-icon>
-        </v-btn>
-      </v-row>
+      <v-col class="pt-0">
+        <v-btn block elevation="2" color="primary" @click="toggleAdvancedSearch()">{{
+          advancedSearchActive ? $i18n.t('search.button.simple') : $i18n.t('search.button.advanced')
+        }}</v-btn>
+      </v-col>
+    </v-row>
 
-      <v-row class="my-3">
-        <v-btn block color="primary darken-2" @click="addField()">
-          {{ $i18n.t('search.add-field') }}
-        </v-btn>
-      </v-row>
-    </div>
+    <v-expand-transition>
+      <div v-if="advancedSearchActive">
+        <div v-for="(field, index) in advancedSearch" :key="index">
+          <v-divider v-if="$vuetify.breakpoint.mdAndDown" class="my-5"></v-divider>
+
+          <v-row class="d-flex align-center">
+            <v-col :cols="$vuetify.breakpoint.mdAndDown ? 12 : 4">
+              <v-select
+                v-model="field.field"
+                :items="advancedFields"
+                item-text="text"
+                item-value="value"
+                :label="$i18n.t('search.field')"
+                single-line
+                outlined
+                dense
+                hide-details="auto"
+              ></v-select>
+            </v-col>
+
+            <v-col :cols="$vuetify.breakpoint.mdAndDown ? 12 : 3">
+              <v-select
+                v-model="field.op"
+                :items="operations"
+                item-text="text"
+                item-value="value"
+                :label="$i18n.t('search.operation')"
+                single-line
+                outlined
+                dense
+                hide-details="auto"
+              ></v-select>
+            </v-col>
+
+            <v-col
+              :cols="
+                $vuetify.breakpoint.mdAndDown
+                  ? advancedSearch.length !== 1
+                    ? 10
+                    : 12
+                  : advancedSearch.length !== 1
+                  ? 4
+                  : 5
+              "
+            >
+              <v-text-field
+                v-if="!field.op || field.op !== 'blank'"
+                :label="$i18n.t('search.value')"
+                outlined
+                dense
+                v-model="field.value"
+                hide-details="auto"
+              ></v-text-field>
+
+              <v-select
+                v-else
+                v-model="field.value"
+                :items="[
+                  { text: $i18n.t('search.value-blank.true'), value: true },
+                  { text: $i18n.t('search.value-blank.false'), value: false },
+                ]"
+                item-text="text"
+                item-value="value"
+                :label="$i18n.t('search.value')"
+                single-line
+                outlined
+                dense
+                hide-details="auto"
+              ></v-select>
+            </v-col>
+
+            <v-btn
+              v-if="advancedSearch.length !== 1"
+              icon
+              color="red darken-4"
+              @click="removeField(index)"
+            >
+              <v-icon>mdi-trash-can-outline</v-icon>
+            </v-btn>
+          </v-row>
+        </div>
+
+        <v-row class="mt-5">
+          <v-col class="pt-0">
+            <v-btn block color="primary darken-2" @click="addField()">
+              {{ $i18n.t('search.add-field') }}
+            </v-btn>
+          </v-col>
+        </v-row>
+      </div>
+    </v-expand-transition>
   </v-container>
 </template>
 
