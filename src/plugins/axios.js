@@ -4,9 +4,9 @@ import VueAxios from 'vue-axios'
 
 Vue.use(VueAxios, axios)
 //axios.defaults.baseURL = process.env.VUE_APP_API_URL || ''
-//axios.defaults.baseURL = 'https://api.coisa.online/'
+axios.defaults.baseURL = 'https://api.coisa.online:3000/'
 
-/* */
+/* *
 axios.defaults.baseURL = 'http://localhost:3000/'
 /* */
 
@@ -16,7 +16,7 @@ axios.interceptors.request.use(
     // If request is different than any of the URLS in urlsExcludedForBearerHeader
     // then send Authorization header with token from localstorage
     const urlsExcludedForBearerHeader = [
-      '/auth',
+      '/auth/login',
       '/auth/register',
       '/health/uptime',
       '/health/version',
