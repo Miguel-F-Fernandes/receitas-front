@@ -55,6 +55,14 @@
     },
 
     created() {
+      document.title = this.$i18n.t(`toolbar-title.${this.$route.name}`)
+      this.$watch(
+        () => this.$i18n.locale,
+        () => {
+          document.title = this.$i18n.t(`toolbar-title.${this.$route.name}`)
+        }
+      )
+
       this.$watch(
         () => this.$route.query,
         async to => {

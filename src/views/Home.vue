@@ -4,7 +4,7 @@
       <v-app-bar-nav-icon @click.stop="drawer = !drawer"></v-app-bar-nav-icon>
 
       <v-toolbar-title>{{
-        this.$route.name ? $i18n.t(`toolbar-title.${this.$route.name}`) : ''
+        this.$route.name ? $i18n.t(`toolbar-title.${this.$route.name}`) : title
       }}</v-toolbar-title>
 
       <v-spacer></v-spacer>
@@ -229,7 +229,15 @@
       feedback: null,
       feedbackDialog: false,
       langs: ['en', 'br'],
+      title: null,
     }),
+
+    created() {
+      this.title = document.title
+      new MutationObserver(() => {
+        this.title = document.title
+      }).observe(document.querySelector('title'), { childList: true })
+    },
 
     mounted() {
       let token = localStorage.getItem('token')

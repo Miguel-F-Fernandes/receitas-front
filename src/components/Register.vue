@@ -87,6 +87,16 @@
       loading: false,
     }),
 
+    created() {
+      document.title = this.$i18n.t(`toolbar-title.${this.$route.name}`)
+      this.$watch(
+        () => this.$i18n.locale,
+        () => {
+          document.title = this.$i18n.t(`toolbar-title.${this.$route.name}`)
+        }
+      )
+    },
+
     mounted() {
       let token = localStorage.getItem('token')
       if ('token' in localStorage && token !== undefined && token !== null) {

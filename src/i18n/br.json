@@ -104,6 +104,7 @@
     "Register": "Cadastro",
     "IngredientList": "Ingredientes",
     "MyIngredientList": "Meu armário",
-    "RecipeList": "Coquetéis"
+    "RecipeList": "Coquetéis",
+    "NotFound": "Página não encontrada"
   }
 }

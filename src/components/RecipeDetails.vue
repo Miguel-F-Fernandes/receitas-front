@@ -7,9 +7,6 @@
         class="d-flex flex-no-wrap justify-start"
         :class="$vuetify.breakpoint.smAndDown ? 'flex-column' : ''"
       >
-        <p v-if="$vuetify.breakpoint.smAndDown" class="text-h3 font-weight-light">
-          {{ recipe.name }}
-        </p>
         <v-img
           :class="$vuetify.breakpoint.smAndDown ? 'align-self-center' : ''"
           height="300"
@@ -117,6 +114,13 @@
     }),
 
     created() {
+      this.$watch(
+        () => this.recipe,
+        () => {
+          document.title = this.recipe.name
+        }
+      )
+
       this.fetchRecipe(this.$route.params.id)
       this.$watch(
         () => this.$route.params,
