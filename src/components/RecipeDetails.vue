@@ -3,13 +3,25 @@
     <div v-if="loading">{{ $i18n.t('recipe-details.loading') }}...</div>
 
     <div v-else>
-      <div class="d-flex flex-no-wrap justify-start">
-        <v-img height="300" width="300" :src="recipe.image" :contain="true"></v-img>
+      <div
+        class="d-flex flex-no-wrap justify-start"
+        :class="$vuetify.breakpoint.mdAndDown ? 'flex-column' : ''"
+      >
+        <p v-if="$vuetify.breakpoint.mdAndDown" class="text-h3 font-weight-light">
+          {{ recipe.name }}
+        </p>
+        <v-img
+          :class="$vuetify.breakpoint.mdAndDown ? 'align-self-center' : ''"
+          height="300"
+          width="300"
+          :src="recipe.image"
+          :contain="true"
+        ></v-img>
 
         <div class="d-flex flex-column">
-          <p class="text-h2">{{ recipe.name }}</p>
+          <p v-if="$vuetify.breakpoint.mdAndUp" class="text-h2">{{ recipe.name }}</p>
 
-          <div>
+          <div :class="$vuetify.breakpoint.mdAndDown ? 'align-self-start' : ''">
             <v-row class="mx-0 my-4">
               <v-rating :value="recipe.hardness" :length="10" dense readonly class="ml-auto">
                 <template v-slot:item="props">
@@ -46,7 +58,12 @@
         <v-divider></v-divider>
 
         <v-card-text>
-          <v-btn-toggle v-model="amountType" mandatory dense style="float: right;">
+          <v-btn-toggle
+            v-model="amountType"
+            mandatory
+            dense
+            :style="$vuetify.breakpoint.mdAndUp ? 'float: right;' : ''"
+          >
             <v-btn v-for="type in amountTypes" :key="type" :value="type">
               {{ type }}
             </v-btn>
@@ -61,7 +78,7 @@
               </v-list-item-action>
 
               <v-list-item-content>
-                <v-list-item-title class="font-weight-regular">{{
+                <v-list-item-title class="font-weight-regular ingredient">{{
                   ingredient.ingredient.name
                 }}</v-list-item-title>
               </v-list-item-content>
@@ -132,5 +149,8 @@
   p,
   .v-card__title {
     word-break: keep-all;
+  }
+  .ingredient {
+    white-space: initial;
   }
 </style>
