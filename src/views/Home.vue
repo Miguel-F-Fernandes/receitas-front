@@ -1,7 +1,7 @@
 <template>
   <div style="height: 100%">
     <v-expand-transition>
-      <v-toolbar v-if="$vuetify.breakpoint.mdAndDown && !drawer" dense color="grey lighten-3">
+      <v-toolbar v-if="$vuetify.breakpoint.smAndDown && !drawer" dense color="grey lighten-3">
         <v-app-bar-nav-icon @click.stop="drawer = !drawer"></v-app-bar-nav-icon>
 
         <v-toolbar-title>{{
@@ -63,8 +63,8 @@
 
     <v-navigation-drawer
       absolute
-      :permanent="$vuetify.breakpoint.mdAndUp"
-      :expand-on-hover="$vuetify.breakpoint.mdAndUp"
+      :permanent="$vuetify.breakpoint.smAndUp"
+      :expand-on-hover="$vuetify.breakpoint.smAndUp"
       app
       style="position: fixed"
       class="grey lighten-3"
@@ -91,7 +91,7 @@
       </template>
 
       <template v-slot:append>
-        <v-list dense v-if="$vuetify.breakpoint.mdAndUp">
+        <v-list dense v-if="$vuetify.breakpoint.smAndUp">
           <!-- language picker -->
           <v-menu top close-on-click>
             <template v-slot:activator="{ on, attrs }">

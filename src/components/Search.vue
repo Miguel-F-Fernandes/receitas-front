@@ -1,6 +1,6 @@
 <template>
   <v-container>
-    <v-row v-if="$vuetify.breakpoint.mdAndUp">
+    <v-row v-if="$vuetify.breakpoint.smAndUp">
       <v-col class="d-flex align-center mb-2">
         <v-text-field
           :label="label"
@@ -39,10 +39,10 @@
     <v-expand-transition>
       <div v-if="advancedSearchActive">
         <div v-for="(field, index) in advancedSearch" :key="index">
-          <v-divider v-if="$vuetify.breakpoint.mdAndDown" class="my-5"></v-divider>
+          <v-divider v-if="$vuetify.breakpoint.smAndDown" class="my-5"></v-divider>
 
           <v-row class="d-flex align-center">
-            <v-col :cols="$vuetify.breakpoint.mdAndDown ? 12 : 4">
+            <v-col :cols="$vuetify.breakpoint.smAndDown ? 12 : 4">
               <v-select
                 v-model="field.field"
                 :items="advancedFields"
@@ -56,7 +56,7 @@
               ></v-select>
             </v-col>
 
-            <v-col :cols="$vuetify.breakpoint.mdAndDown ? 12 : 3">
+            <v-col :cols="$vuetify.breakpoint.smAndDown ? 12 : 3">
               <v-select
                 v-model="field.op"
                 :items="operations"
@@ -72,7 +72,7 @@
 
             <v-col
               :cols="
-                $vuetify.breakpoint.mdAndDown
+                $vuetify.breakpoint.smAndDown
                   ? advancedSearch.length !== 1
                     ? 10
                     : 12

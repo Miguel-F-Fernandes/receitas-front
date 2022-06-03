@@ -53,11 +53,11 @@
     <v-divider class="mx-5"></v-divider>
 
     <v-row class="mt-10">
-      <p class="caption" v-if="$vuetify.breakpoint.mdAndDown">
+      <p class="caption" v-if="$vuetify.breakpoint.smAndDown">
         {{ $i18n.t('login.register.text') }}
       </p>
       <v-btn block v-on:click="register()" color="primary darken-2">
-        {{ $vuetify.breakpoint.mdAndDown ? '' : $i18n.t('login.register.text') }}
+        {{ $vuetify.breakpoint.smAndDown ? '' : $i18n.t('login.register.text') }}
         {{ $i18n.t('login.register.button') }}
       </v-btn>
     </v-row>

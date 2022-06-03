@@ -5,13 +5,13 @@
     <div v-else>
       <div
         class="d-flex flex-no-wrap justify-start"
-        :class="$vuetify.breakpoint.mdAndDown ? 'flex-column' : ''"
+        :class="$vuetify.breakpoint.smAndDown ? 'flex-column' : ''"
       >
-        <p v-if="$vuetify.breakpoint.mdAndDown" class="text-h3 font-weight-light">
+        <p v-if="$vuetify.breakpoint.smAndDown" class="text-h3 font-weight-light">
           {{ recipe.name }}
         </p>
         <v-img
-          :class="$vuetify.breakpoint.mdAndDown ? 'align-self-center' : ''"
+          :class="$vuetify.breakpoint.smAndDown ? 'align-self-center' : ''"
           height="300"
           width="300"
           :src="recipe.image"
@@ -19,9 +19,9 @@
         ></v-img>
 
         <div class="d-flex flex-column">
-          <p v-if="$vuetify.breakpoint.mdAndUp" class="text-h2">{{ recipe.name }}</p>
+          <p v-if="$vuetify.breakpoint.smAndUp" class="text-h2">{{ recipe.name }}</p>
 
-          <div :class="$vuetify.breakpoint.mdAndDown ? 'align-self-start' : ''">
+          <div :class="$vuetify.breakpoint.smAndDown ? 'align-self-start' : ''">
             <v-row class="mx-0 my-4">
               <v-rating :value="recipe.hardness" :length="10" dense readonly class="ml-auto">
                 <template v-slot:item="props">
@@ -62,7 +62,7 @@
             v-model="amountType"
             mandatory
             dense
-            :style="$vuetify.breakpoint.mdAndUp ? 'float: right;' : ''"
+            :style="$vuetify.breakpoint.smAndUp ? 'float: right;' : ''"
           >
             <v-btn v-for="type in amountTypes" :key="type" :value="type">
               {{ type }}
