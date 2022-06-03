@@ -182,7 +182,7 @@
           offset: this.backendEntries.length,
           'name[contains]': this.backendSearch,
         })
-        this.backendEntries = this.entries.concat(newEntries)
+        this.backendEntries = this.backendEntries.concat(newEntries)
         this.backendLoading = false
 
         if (!newEntries.length) {
