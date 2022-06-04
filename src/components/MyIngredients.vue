@@ -26,7 +26,7 @@
       <v-skeleton-loader
         v-show="loading"
         v-for="n in 25"
-        :key="n"
+        :key="'skel-' + n"
         type="card, paragraph"
         min-width="400"
         class="mx-auto mb-5 pa-3"
@@ -37,7 +37,7 @@
         width="260"
         class="d-flex mx-auto mb-5"
         v-for="(ingredient, index) in allIngredients"
-        :key="index"
+        :key="'my-ingr-' + index"
       >
         <div class="d-flex justify-space-between" style="width: 100%">
           <div class="d-flex flex-column justify-space-between">

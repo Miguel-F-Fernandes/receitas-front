@@ -6,7 +6,7 @@
       <v-skeleton-loader
         v-show="loading"
         v-for="n in 25"
-        :key="n"
+        :key="'skel-' + n"
         type="card, paragraph"
         min-width="350"
         class="mx-auto mb-5 pa-3"
@@ -15,7 +15,7 @@
 
       <RecipeCard
         v-for="(recipe, index) in allRecipes"
-        :key="index"
+        :key="'recipe-' + index"
         :recipe="recipe"
         class="mx-auto mb-5"
       ></RecipeCard>

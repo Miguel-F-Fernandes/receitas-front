@@ -27,9 +27,9 @@
         <v-list>
           <v-list-item
             v-for="(lang, index) in langs"
-            :key="index"
+            :key="'lang-app-' + index"
             :value="lang"
-            @click="$i18n.locale = lang"
+            @click="setLocale(lang)"
           >
             <v-list-item-title>{{ lang.toUpperCase() }}</v-list-item-title>
           </v-list-item>
@@ -115,9 +115,9 @@
             <v-list>
               <v-list-item
                 v-for="(lang, index) in langs"
-                :key="index"
+                :key="'lang-drawer-' + index"
                 :value="lang"
-                @click="$i18n.locale = lang"
+                @click="setLocale(lang)"
               >
                 <v-list-item-title>{{ lang.toUpperCase() }}</v-list-item-title>
               </v-list-item>
@@ -244,6 +244,16 @@
       new MutationObserver(() => {
         this.title = document.title
       }).observe(document.querySelector('title'), { childList: true })
+
+      let locale = localStorage.getItem('locale')
+      if (
+        'locale' in localStorage &&
+        locale !== undefined &&
+        locale !== null &&
+        this.langs.includes(locale)
+      ) {
+        this.$i18n.locale = locale
+      }
     },
 
     mounted() {
@@ -265,6 +275,11 @@
     },
 
     methods: {
+      setLocale(locale) {
+        this.$i18n.locale = locale
+        localStorage.setItem('locale', locale)
+      },
+
       onScroll() {
         this.topOfScreen = !window.scrollY
       },

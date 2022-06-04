@@ -10,7 +10,7 @@
       <v-skeleton-loader
         v-show="loading"
         v-for="n in 25"
-        :key="n"
+        :key="'skel-' + n"
         type="card, paragraph"
         min-width="350"
         class="mx-auto mb-5 pa-3"
@@ -19,7 +19,7 @@
 
       <IngredientCard
         v-for="(ingredient, index) in allIngredients"
-        :key="index"
+        :key="'ingr-' + index"
         :ingredient="ingredient"
         class="mx-auto mb-5"
       ></IngredientCard>
