@@ -37,7 +37,7 @@
         width="260"
         class="d-flex mx-auto mb-5"
         v-for="(ingredient, index) in allIngredients"
-        :key="ingredient.id"
+        :key="index"
       >
         <div class="d-flex justify-space-between" style="width: 100%">
           <div class="d-flex flex-column justify-space-between">

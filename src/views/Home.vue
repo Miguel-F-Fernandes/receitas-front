@@ -1,6 +1,12 @@
 <template>
   <div style="height: 100%">
-    <v-app-bar app dense fixed hide-on-scroll v-if="$vuetify.breakpoint.smAndDown && !drawer">
+    <v-app-bar
+      app
+      dense
+      fixed
+      :hide-on-scroll="!topOfScreen"
+      v-if="$vuetify.breakpoint.smAndDown && !drawer"
+    >
       <v-app-bar-nav-icon @click.stop="drawer = !drawer"></v-app-bar-nav-icon>
 
       <v-toolbar-title>{{
@@ -230,6 +236,7 @@
       feedbackDialog: false,
       langs: ['en', 'br'],
       title: null,
+      topOfScreen: true,
     }),
 
     created() {
@@ -244,6 +251,11 @@
       if ('token' in localStorage && token !== undefined && token !== null) {
         this.$store.commit('auth/setToken', token)
       }
+      window.addEventListener('scroll', this.onScroll)
+    },
+
+    beforeDestroy() {
+      window.removeEventListener('scroll', this.onScroll)
     },
 
     computed: {
@@ -253,6 +265,10 @@
     },
 
     methods: {
+      onScroll() {
+        this.topOfScreen = !window.scrollY
+      },
+
       goTo(name) {
         if (this.$route.name !== name) {
           this.$router.push({

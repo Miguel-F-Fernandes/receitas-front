@@ -14,8 +14,8 @@
       ></v-skeleton-loader>
 
       <RecipeCard
-        v-for="recipe in allRecipes"
-        :key="recipe.id"
+        v-for="(recipe, index) in allRecipes"
+        :key="index"
         :recipe="recipe"
         class="mx-auto mb-5"
       ></RecipeCard>

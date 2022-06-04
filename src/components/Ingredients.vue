@@ -18,8 +18,8 @@
       ></v-skeleton-loader>
 
       <IngredientCard
-        v-for="ingredient in allIngredients"
-        :key="ingredient.id"
+        v-for="(ingredient, index) in allIngredients"
+        :key="index"
         :ingredient="ingredient"
         class="mx-auto mb-5"
       ></IngredientCard>
